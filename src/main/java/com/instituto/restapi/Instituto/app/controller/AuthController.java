@@ -8,6 +8,8 @@ import com.instituto.restapi.Instituto.app.entity.User;
 import com.instituto.restapi.Instituto.app.repository.RoleRepository;
 import com.instituto.restapi.Instituto.app.repository.UserRepository;
 import com.instituto.restapi.Instituto.app.security.JwtTokenProvider;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
+@Api(value = "Auth controller allows user to signup and log in")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -42,8 +46,9 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    @ApiOperation(value = "Log in the online Institute RESTful API")
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthResponseDTO> logIn(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<JwtAuthResponseDTO> logIn(@Valid @RequestBody LoginDTO loginDTO){
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( loginDTO.getUsernameOrEmail(),loginDTO.getPassword()));
 
@@ -54,8 +59,9 @@ public class AuthController {
         return  ResponseEntity.ok(new JwtAuthResponseDTO(token));
     }
 
+    @ApiOperation(value = "Sign up the online Institute RESTful API")
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody SignUpDTO signUpDTO){
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpDTO signUpDTO){
 
         if(userRepository.existsByUsername(signUpDTO.getUsername())){
 
