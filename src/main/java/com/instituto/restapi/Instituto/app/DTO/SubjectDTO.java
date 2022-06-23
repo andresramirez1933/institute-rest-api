@@ -25,6 +25,5 @@ public class SubjectDTO {
     @Size(min = 3, message = "Subject must have a least three characters")
     private String subjectName;
 
-    @ApiModelProperty(value = "Subject students")
     private Set<StudentDTO> students;
 }

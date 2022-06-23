@@ -6,12 +6,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
-
-
+@Getter
+@Setter
 @Entity
 @Table(name= "subjects")
 public class Subject {

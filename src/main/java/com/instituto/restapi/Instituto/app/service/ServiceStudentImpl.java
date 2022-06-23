@@ -34,10 +34,10 @@ public class ServiceStudentImpl  implements ServiceStudent {
 
         Subject subject  = repositorySubject.findById(subjectId).orElseThrow(() -> new ResourceNotFound("Subject",subjectId));
 
-        Student student = toEntity(studentDTO);
+        Student student = mapToEntity(studentDTO);
         student.setSubject(subject);
 
-        return toDTO(repositoryStudent.save(student));
+        return mapToDTO(repositoryStudent.save(student));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ServiceStudentImpl  implements ServiceStudent {
 
         List<Student> students =  repositoryStudent.findBySubjectId(subjectId);
 
-        return students.stream().map(student -> toDTO(student)).collect(Collectors.toList());
+        return students.stream().map(student -> mapToDTO(student)).collect(Collectors.toList());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ServiceStudentImpl  implements ServiceStudent {
             throw new InstituteAPIException(HttpStatus.BAD_REQUEST, "Student doesn't belong to that class");
         }
 
-        return toDTO(student);
+        return mapToDTO(student);
 
     }
 
@@ -76,7 +76,7 @@ public class ServiceStudentImpl  implements ServiceStudent {
 
         Student studentUpgraded = repositoryStudent.save(student);
 
-        return toDTO(studentUpgraded);
+        return mapToDTO(studentUpgraded);
     }
 
     @Override
@@ -91,11 +91,11 @@ public class ServiceStudentImpl  implements ServiceStudent {
     }
 
 
-    private StudentDTO toDTO(Student student){
+    private StudentDTO mapToDTO(Student student){
         return modelMapper.map(student, StudentDTO.class);
     }
 
-    private Student toEntity(StudentDTO studentDTO){
+    private Student mapToEntity(StudentDTO studentDTO){
         return modelMapper.map(studentDTO, Student.class);
     }
 

@@ -26,7 +26,7 @@ public class StudentController {
     @GetMapping("subjects/{subjectId}/students")
     public ResponseEntity<List<StudentDTO>> getAllStudents(@PathVariable("subjectId") Long subjectId){
 
-        return new ResponseEntity<List<StudentDTO>>(serviceStudent.getStudentsBySubjectId(subjectId), HttpStatus.CREATED);
+        return new ResponseEntity<List<StudentDTO>>(serviceStudent.getStudentsBySubjectId(subjectId), HttpStatus.OK);
     }
 
     @GetMapping("subjects/{subjectId}/students/{studentId}")

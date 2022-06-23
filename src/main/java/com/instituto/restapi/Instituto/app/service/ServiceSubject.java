@@ -9,7 +9,7 @@ public interface ServiceSubject {
 
     public SubjectDTO generateSubject(SubjectDTO subjectDTO);
 
-    public SubjectResponse listSubjects(int pageNo, int pageSize, String sortBy, String dortDir);
+    public SubjectResponse listSubjects(int pageNo, int pageSize, String sortBy, String sortDir);
 
     public SubjectDTO updateSubject(SubjectDTO subjectDTO, Long id);
 

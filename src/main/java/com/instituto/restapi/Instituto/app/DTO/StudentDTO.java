@@ -15,8 +15,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ApiModel(description = "Student model info" )
 public class StudentDTO {
 

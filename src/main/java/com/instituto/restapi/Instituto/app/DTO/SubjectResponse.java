@@ -14,7 +14,7 @@ public class SubjectResponse {
     private List<SubjectDTO> content;
     private int pageNo;
     private int pageSize;
-    private Long totalElements;
+    private long totalElements;
     private int totalPages;
     private boolean last;
 

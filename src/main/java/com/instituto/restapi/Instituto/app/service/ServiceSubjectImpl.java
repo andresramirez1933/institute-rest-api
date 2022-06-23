@@ -29,19 +29,18 @@ public class ServiceSubjectImpl implements ServiceSubject {
     @Override
     public SubjectDTO generateSubject(SubjectDTO subjectDTO) {
 
-        Subject subject = toEntity(subjectDTO);
+        Subject subject = mapToEntity(subjectDTO);
 
         Subject savedSubject = subjectRepository.save(subject);
 
 
-        return toDTO(savedSubject);
+        return mapToDTO(savedSubject);
     }
 
     @Override
     public SubjectResponse listSubjects(int pageNo, int pageSize, String sortBy, String sortDir) {
 
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
-                : Sort.by(sortBy).descending();
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
@@ -50,7 +49,7 @@ public class ServiceSubjectImpl implements ServiceSubject {
 
         List<Subject> listOfSubjects = subjects.getContent();
 
-        List<SubjectDTO> content = listOfSubjects.stream().map(subject -> toDTO(subject)).collect(Collectors.toList());
+        List<SubjectDTO> content = listOfSubjects.stream().map(subject -> mapToDTO(subject)).collect(Collectors.toList());
 
         SubjectResponse subjectResponse = new SubjectResponse();
         subjectResponse.setContent(content);
@@ -72,7 +71,7 @@ public class ServiceSubjectImpl implements ServiceSubject {
 
         Subject subjectUpdated = subjectRepository.save(subject);
 
-        return toDTO(subject);
+        return mapToDTO(subject);
 
     }
 
@@ -80,7 +79,7 @@ public class ServiceSubjectImpl implements ServiceSubject {
     public SubjectDTO getSubjectById(Long id) {
         Subject subject = subjectRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Subject",id));
 
-        return toDTO(subject) ;
+        return mapToDTO(subject) ;
     }
 
     @Override
@@ -92,12 +91,12 @@ public class ServiceSubjectImpl implements ServiceSubject {
 
     }
 
-    private SubjectDTO toDTO(Subject subject){
+    private SubjectDTO mapToDTO(Subject subject){
 
         return modelMapper.map(subject, SubjectDTO.class);
     }
 
-    private Subject toEntity(SubjectDTO subjectDTO){
+    private Subject mapToEntity(SubjectDTO subjectDTO){
         return modelMapper.map(subjectDTO, Subject.class);
     }
 }
