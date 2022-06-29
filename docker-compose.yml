@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  #name of the mysql container
+  myapp-mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_DATABASE=institute
+      - MYSQL_USER=andres
+      - MYSQL_PASSWORD=admin123
+
+    ports:
+      - 33061:3306
+
+  #name of the app container
+  myapp-main:
+    image: instituteapp
+    restart: on-failure
+    depends_on:
+      - myapp-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=institutedatabase
+      - DATABASE_USER=andres
+      - DATABASE_PASSWORD=admin123
+      - DATABASE_NAME=institute
+      - DATABASE_PORT=33061
