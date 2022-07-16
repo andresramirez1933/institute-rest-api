@@ -1,6 +1,7 @@
 package com.instituto.restapi.Instituto.app.controller;
 
-import com.instituto.restapi.Instituto.app.DTO.StudentDTO;
+import com.instituto.restapi.Instituto.app.payload.AgeRangeRequest;
+import com.instituto.restapi.Instituto.app.payload.StudentDTO;
 import com.instituto.restapi.Instituto.app.service.ServiceStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class StudentController {
 
     @Autowired
@@ -33,6 +34,14 @@ public class StudentController {
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable("subjectId") Long subjectId,
                                                      @PathVariable("studentId") Long studentId){
         return new ResponseEntity<StudentDTO>(serviceStudent.getStudentById(subjectId, studentId), HttpStatus.OK);
+    }
+
+    //Get students by age range
+    @PostMapping("/subjects/age")
+    public ResponseEntity<List<StudentDTO>> getAllStudentsByAgeRange(@RequestBody AgeRangeRequest request){
+
+        return new ResponseEntity<>(serviceStudent.findByStudentRangeAge(request.getStartAge(),
+                request.getEndAge()), HttpStatus.OK);
     }
 
     @PutMapping("subjects/{subjectId}/students/{studentId}")

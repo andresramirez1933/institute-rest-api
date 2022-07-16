@@ -1,20 +1,24 @@
 package com.instituto.restapi.Instituto.app.service;
 
-import com.instituto.restapi.Instituto.app.DTO.SubjectDTO;
-import com.instituto.restapi.Instituto.app.DTO.SubjectResponse;
+import com.instituto.restapi.Instituto.app.payload.SubjectDTO;
+import com.instituto.restapi.Instituto.app.payload.SubjectResponse;
 
 import java.util.List;
 
 public interface ServiceSubject {
 
-    public SubjectDTO generateSubject(SubjectDTO subjectDTO);
+    SubjectDTO generateSubject(SubjectDTO subjectDTO);
 
-    public SubjectResponse listSubjects(int pageNo, int pageSize, String sortBy, String sortDir);
+    SubjectResponse listSubjects(int pageNo, int pageSize, String sortBy, String sortDir);
 
-    public SubjectDTO updateSubject(SubjectDTO subjectDTO, Long id);
+    SubjectDTO updateSubject(SubjectDTO subjectDTO, Long id);
 
-    public SubjectDTO getSubjectById(Long id);
+    SubjectDTO getSubjectById(Long id);
 
-    public void deleteById(Long id);
+    void deleteById(Long id);
+
+    List<SubjectDTO> findByProfessorName(String name);
+
+
 
 }

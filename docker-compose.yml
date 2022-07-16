@@ -28,3 +28,5 @@ services:
       - DATABASE_PASSWORD=admin123
       - DATABASE_NAME=institute
       - DATABASE_PORT=33061
+    build:
+      .

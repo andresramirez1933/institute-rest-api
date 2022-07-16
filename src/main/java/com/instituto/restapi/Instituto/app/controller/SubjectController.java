@@ -1,7 +1,7 @@
 package com.instituto.restapi.Instituto.app.controller;
 
-import com.instituto.restapi.Instituto.app.DTO.SubjectDTO;
-import com.instituto.restapi.Instituto.app.DTO.SubjectResponse;
+import com.instituto.restapi.Instituto.app.payload.SubjectDTO;
+import com.instituto.restapi.Instituto.app.payload.SubjectResponse;
 import com.instituto.restapi.Instituto.app.service.ServiceSubject;
 import com.instituto.restapi.Instituto.app.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class SubjectController {
 
     @Autowired
@@ -40,6 +41,12 @@ public class SubjectController {
     public ResponseEntity<SubjectDTO> getSubjectById(@PathVariable("id") Long id){
 
         return new ResponseEntity<>(serviceSubject.getSubjectById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/subjects/professor/{name}")
+    public ResponseEntity<List<SubjectDTO>> getSubjectByProfessor(@PathVariable("name") String name){
+
+        return new ResponseEntity<>(serviceSubject.findByProfessorName(name), HttpStatus.OK);
     }
 
 

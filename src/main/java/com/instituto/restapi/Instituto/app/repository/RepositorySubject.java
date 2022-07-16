@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface RepositorySubject extends JpaRepository<Subject, Long> {
 
-
+    List<Subject> findByProfessorName(String name);
 }

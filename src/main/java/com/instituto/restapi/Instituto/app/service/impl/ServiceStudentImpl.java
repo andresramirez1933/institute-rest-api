@@ -1,13 +1,13 @@
-package com.instituto.restapi.Instituto.app.service;
+package com.instituto.restapi.Instituto.app.service.impl;
 
-import com.instituto.restapi.Instituto.app.DTO.StudentDTO;
-import com.instituto.restapi.Instituto.app.DTO.SubjectDTO;
+import com.instituto.restapi.Instituto.app.payload.StudentDTO;
 import com.instituto.restapi.Instituto.app.entity.Student;
 import com.instituto.restapi.Instituto.app.entity.Subject;
 import com.instituto.restapi.Instituto.app.exception.InstituteAPIException;
 import com.instituto.restapi.Instituto.app.exception.ResourceNotFound;
 import com.instituto.restapi.Instituto.app.repository.RepositoryStudent;
 import com.instituto.restapi.Instituto.app.repository.RepositorySubject;
+import com.instituto.restapi.Instituto.app.service.ServiceStudent;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -88,6 +88,14 @@ public class ServiceStudentImpl  implements ServiceStudent {
 
         repositoryStudent.deleteById(studentId);
 
+    }
+
+    @Override
+    public List<StudentDTO> findByStudentRangeAge(Integer startAge, Integer endAge) {
+
+        List<Student> students = repositoryStudent.findStudentByAgeRange(startAge, endAge);
+
+        return students.stream().map(student -> mapToDTO(student)).collect(Collectors.toList());
     }
 
 

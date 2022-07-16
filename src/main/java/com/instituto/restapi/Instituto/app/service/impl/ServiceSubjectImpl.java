@@ -1,10 +1,11 @@
-package com.instituto.restapi.Instituto.app.service;
+package com.instituto.restapi.Instituto.app.service.impl;
 
-import com.instituto.restapi.Instituto.app.DTO.SubjectDTO;
-import com.instituto.restapi.Instituto.app.DTO.SubjectResponse;
+import com.instituto.restapi.Instituto.app.payload.SubjectDTO;
+import com.instituto.restapi.Instituto.app.payload.SubjectResponse;
 import com.instituto.restapi.Instituto.app.entity.Subject;
 import com.instituto.restapi.Instituto.app.exception.ResourceNotFound;
 import com.instituto.restapi.Instituto.app.repository.RepositorySubject;
+import com.instituto.restapi.Instituto.app.service.ServiceSubject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -88,6 +89,15 @@ public class ServiceSubjectImpl implements ServiceSubject {
         Subject subject = subjectRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Subject",id));
 
         subjectRepository.delete(subject);
+
+    }
+
+    @Override
+    public List<SubjectDTO> findByProfessorName(String name) {
+
+        List<Subject> subjects = subjectRepository.findByProfessorName(name);
+
+        return subjects.stream().map(subject -> mapToDTO(subject)).collect(Collectors.toList());
 
     }
 

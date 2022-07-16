@@ -1,8 +1,6 @@
 package com.instituto.restapi.Instituto.app.service;
 
-import com.instituto.restapi.Instituto.app.DTO.StudentDTO;
-import com.instituto.restapi.Instituto.app.DTO.SubjectDTO;
-import com.instituto.restapi.Instituto.app.entity.Student;
+import com.instituto.restapi.Instituto.app.payload.StudentDTO;
 
 import java.util.List;
 
@@ -16,4 +14,6 @@ public interface ServiceStudent {
     StudentDTO upgradeStudent(Long subjectId, Long studentId, StudentDTO studentDTO);
 
     void deleteById(Long subjectId, Long studentId);
+
+    List<StudentDTO> findByStudentRangeAge(Integer startAge, Integer endAge);
 }

@@ -1,8 +1,8 @@
 package com.instituto.restapi.Instituto.app.controller;
 
-import com.instituto.restapi.Instituto.app.DTO.JwtAuthResponseDTO;
-import com.instituto.restapi.Instituto.app.DTO.LoginDTO;
-import com.instituto.restapi.Instituto.app.DTO.SignUpDTO;
+import com.instituto.restapi.Instituto.app.payload.JwtAuthResponseDTO;
+import com.instituto.restapi.Instituto.app.payload.LoginDTO;
+import com.instituto.restapi.Instituto.app.payload.SignUpDTO;
 import com.instituto.restapi.Instituto.app.entity.Role;
 import com.instituto.restapi.Instituto.app.entity.User;
 import com.instituto.restapi.Instituto.app.repository.RoleRepository;

@@ -1,4 +1,4 @@
-package com.instituto.restapi.Instituto.app.DTO;
+package com.instituto.restapi.Instituto.app.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
